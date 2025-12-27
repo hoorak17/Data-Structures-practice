@@ -1,0 +1,160 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{kotex}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{mystyle}{
+}
+
+\begin{document}
+	
+	\title{자료구조및프로그래밍 HW7}
+	\author{C211171 최후락}
+	\date{2025 11 13}
+	\maketitle
+	
+	\newpage
+	\section{개요}
+	Infix로 주어진 식을 Arraystack을 사용하여 Postfix로 변환한다.\newline
+	post.in의 산술연산뿐 아니라 post2.in의 논리연산도 가능하게 구현한다.
+	\newline\newline
+	1.Arraystack구현\newline\newline
+	2.post구현\newline\newline
+	3.실행결과\newline\newline
+	4.어려웠던 점\newline\newline
+	-코드에 대한 설명은 주석을 참고한다.
+	
+	
+	\newpage
+	\section{Arraystack구현}
+	\subsection{push}
+	Arraystack에서 push를 구현함에 있어 한가지 문제가 있었다. 배열이 고정된 크기 5로 제한되어 있어 만약 5를 넘는 상황이 오면 새로운 item을 push할 수 없었다. 이 문제를 해결하기 위해서 push를 할 때, 현재크기를 넘게 된다면 3만큼 더 큰 배열을 임시로 만든 뒤 기존의 배열을 복사하고 포인터를 옮기는 방식을 사용했다.\newline
+	이를 위해서 int capacity; 를 private에 새로 추가했으며, 다음과 같이 push를 구현했다.
+	\begin{figure}
+		\centering
+		\includegraphics{push}
+		\caption{push}
+		\label{push}
+	\end{figure}
+	\subsection{pop}
+	스택이 비어있지 않은 경우에 한해서 top를 하나 줄여 구현했다.
+	\begin{figure}
+		\centering
+		\includegraphics{pop}
+		\caption{pop}
+		\label{pop}
+	\end{figure}
+	\subsection{peek}
+	스택이 비어있지 않은 경우에 한해서 items[top]를 반환한다.
+	\begin{figure}
+		\centering
+		\includegraphics{peek}
+		\caption{peek}
+		\label{peek}
+	\end{figure}
+	\newpage
+	\section{post구현}
+	post를 구현하기에 앞서, 기존에 작성되어 있는 코드를 이해하는데 상당히 많은 시간을 사용했다. 토큰의 개념과 이를 어떻게 만들어 놓았을지를 코드를 보며 하나씩 공부하는 느낌으로 분석했다. 처음보는 개념인 isp와 icp가 나와서 구현하기전 어떤 개념인지를 살펴보고 어떻게 구현할지 생각하는데도 많은 시간이 소요되었다. \newline\newline
+	\subsection{GetInt}
+	기존에 작성된 생성자를 보고 많이 참고해서 GetInt를 작성했다.
+	\begin{figure}
+		\centering
+		\includegraphics{gen}
+		\caption{token의 생성자}
+		\label{gen}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics{int}
+		\caption{GetInt}
+		\label{int}
+	\end{figure}
+	\subsection{Twocharop}
+	두개의 연산자가 하나의 연산자를 이루는지 확인한다. 지금 위치와 다음위치를 한번에 보고 조합표에 있다면 두개를 하나의 아스키 값으로 받는다.
+	\begin{figure}
+		\centering
+		\includegraphics{Twochar}
+		\caption{Twocharop}
+		\label{Twochar}
+	\end{figure}
+	\subsection{icp}
+	스위치문을 사용해서 구현한다. 수업시간에 배운내용과 여태까지 배운 수학적 지식으로 어렵지 않게 연산자간의 우선순위를 정할 수 있다.
+	\begin{figure}
+		\centering
+		\includegraphics{icp}
+		\caption{icp}
+		\label{icp}
+	\end{figure}
+	\subsection{isp}
+	머리를 좀 써야한다. isp만 고려하는것이 아니라 기존 작성한 icp와 동시에 비교하고 판단해서 스택에 넣을지 뺄지를 결정한다. isp가 icp보다 우선순위가 높거나 같을때 pop되므로 이를 잘 고려해서 스위치문을 작성한다.
+	\begin{figure}
+		\centering
+		\includegraphics{isp}
+		\caption{isp}
+		\label{isp}
+	\end{figure}
+	\subsection{postfix}
+	우리가 지금까지 짠 모든 코드는 이걸 위해서 존재했다. 자세한 설명은 주석참고.
+	\begin{figure}
+		\centering
+		\includegraphics{postfix}
+		\caption{postfix}
+		\label{postfix}
+	\end{figure}
+	
+	
+	
+	
+	\newpage
+	\section{실행결과}
+	\begin{figure}
+		\centering
+		\includegraphics{결과1}
+		\caption{post.in}
+		\label{결과1}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics{결과2}
+		\caption{post2.in}
+		\label{결과2}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics{결과3}
+		\caption{post3.in}
+		\label{결과3}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics{결과4}
+		\caption{post4.in}
+		\label{결과4}
+	\end{figure}
+	실행결과 학번과 함께 post.in, post2.in, post3.in, post4.in 모두 이상없이 출력된다.
+	\newpage
+	
+	\section{어려웠던 점}
+	새로운 코드를 구현하는 것은 늘 어려운 일이고 어떤 방식으로 구현할지 고민하는데 대부분의 시간을 사용한다. 하지만, 이번 과제 hw7에서는 기존에 작성되어 있는 코드를 분석하고 내가 어떤 것을 작성해야 하는지 파악하는데에 전체 시간의 상당부분을 할애했다. 스택을 구현함에 있어서는 기존에 어디선가 봤던 방식들이 떠올라서 비교적 짧은 시간내에 코드를 작성했지만, post는 그렇지 않았다. \newline\newline 강의록에서 infix를 postfix로 stack과 queue를 사용해 변환하는 코드를 봤던 기억을 토대로 작성해보려 했다. 이를 위해서 처음보는 개념인 Expression과 Token을 여기저기 뒤져가면서 공부했다. 처음보는 개념이라 상당한 시간이 소요되었다.\newline \newline isp와 icp 또한 만만치 않았다. 우리가 기존에 사용하던 연산자간의 우선순위인 in stack priority, isp는 스위치문을 사용하여 케이스 분류를 하면 손쉽게 할 수 있었다. 하지만 isp와 비교할 또 다른 우선순위인 icp는 쉽지 않았다. 연산자 간에 우선순위도 비교를 하며 기존에 스택에 들어가 있는 isp와도 동시에 적절한 우선순위를 가져야했다. 여기서 처음보는 \#이 나왔지만 이 연산자는 일종의 보호막이라고 생각하여 맨 뒤로 우선순위를 미뤄놓고 처리하니 어렵지 않게 9번으로 정할 수 있었다.\newline\newline
+	물론 코드를 작성하는데에도 어려움이 많았고 makefile을 통해서 실행할 때도 말썽이었다. 지난번 컴파일러가 잘 물리지 않아서 실행이 안되는 것은\newline **********************************************************************\newline
+	** Visual Studio 2022 Developer Command Prompt v17.13.2\newline
+	** Copyright (c) 2022 Microsoft Corporation\newline
+	**********************************************************************\newline
+	[vcvarsall.bat] Environment initialized for: 'x64'\newline\newline
+	C:\textbackslash Program Files\textbackslash Microsoft Visual Studio\textbackslash2022\textbackslash Community>code .\newline
+	을 사용하여 새로 띄워진 vscode창을 통해서 해결했다. 이번에는 이 새로 킨 vscode에서 make명령어를 인식하지 못했다. 여러가지 방법이 실패했고 최종적으로 make.exe의 실제 위치를 찾아서 환경변수에 새로 물려주는 방식으로 해결했다. 차라리 코드구현에서 막혔다면 공부한다는 생각이라도 했겠지만 make가 실행되지 않자 정말 다해놓고 막힌 기분이었다. 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}

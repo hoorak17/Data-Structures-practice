@@ -1,0 +1,16 @@
+{
+ "version": "0.2.0",
+ "configurations": [
+ {
+ "type": "lldb",
+ "request": "launch",
+ "name": "Debug with Makefile",
+ "program": "${workspaceFolder}/hw7", // window: -> “hw7.exe”
+ "args": [],
+ "cwd": "${workspaceFolder}",
+ "preLaunchTask": "Build with makefile",
+ "stopOnEntry": false,
+ "stdio": ["${workspaceFolder}/post.in", null, null]
+ }
+ ]
+}

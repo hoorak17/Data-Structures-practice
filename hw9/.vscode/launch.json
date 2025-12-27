@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Launch",
+			"program": "${workspaceFolder}/bst2",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"preLaunchTask": "Build bst",
+			"stdio": ["${workspaceFolder}/input.in",null, null]
+		}
+	]
+}
