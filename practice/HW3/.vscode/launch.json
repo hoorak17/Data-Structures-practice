@@ -1,0 +1,20 @@
+{
+" version ": " 0.2.0 ",
+" configurations ": [
+    {
+        " name ": " build : clang ++ > debug ",
+        " type ": " lldb ",
+        " request ": " launch ",
+        " program ": "${ workspaceFolder }/ hw3",
+        " args ": [],
+        "cwd": "${ workspaceFolder }",
+        " preLaunchTask ": " build with clang ++",
+        " stopOnEntry ": false ,
+        " stdio ": [
+            "${ workspaceFolder }/ test .in",
+            "${ workspaceFolder }/ result .out",
+            null
+    ]
+    }
+]
+}
