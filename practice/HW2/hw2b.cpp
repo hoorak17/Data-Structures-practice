@@ -35,7 +35,6 @@ int main(void) {
 
   P1.print();
   P2.print();
-
-  std::cout<<"과제 완";
+  
   return 0;
 }
