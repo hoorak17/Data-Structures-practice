@@ -3,7 +3,8 @@
 #include <vector>
 
 #include "ArrayBag.h"
-//구현 필요
+
+
 template <typename T>
 ArrayBag<T>::ArrayBag() : item_cnt(0), max_items(DEFAULT_CAPACITY) {}
 
