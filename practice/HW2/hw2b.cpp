@@ -1,8 +1,10 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 template <typename T>
+
 class CPoint {
  private:
   T x;
