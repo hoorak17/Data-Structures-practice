@@ -5,7 +5,7 @@ template <typename T>
 T add(T x, T y){
     return x + y;
     
-}//아래 3개 함수를 템플릿 함수로 대체
+}//아래 3개 함수를 템플릿 함수로 대체할 것.
 /*
 int add(int x, int y){
     return x + y;
