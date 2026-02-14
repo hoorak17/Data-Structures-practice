@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+
 template <class T>
 class CPoint{
     private:
@@ -9,8 +10,8 @@ class CPoint{
 
     public:
         CPoint(T x, T y){//생성자에서도 this포인터 사용가능.
-            this->coox = x;
-            cooy = y;//근데 안써도 알아서 유추해준다
+            coox = x;//this사용
+            this->cooy = y;//근데 this 없어도 됨
         }
 
         friend ostream& operator<<(ostream& os, const CPoint<T>& T){//둘 다 레퍼런스를 사용해서 받을 것.
