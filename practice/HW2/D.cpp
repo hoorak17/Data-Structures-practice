@@ -14,8 +14,8 @@ class CPoint{
             this->cooy = y;//근데 this 없어도 됨
         }
 
-        friend ostream& operator<<(ostream& os, const CPoint<T>& T){//둘 다 레퍼런스를 사용해서 받을 것.
-            return os<<"("<<T.coox<<","<<T.cooy<<")"<<endl;//값인지 포인터인지 주의할 것.
+        friend ostream& operator<<(ostream& os, const CPoint<T>& U){//둘 다 레퍼런스를 사용해서 받을 것.
+            return os<<"("<<U.coox<<","<<U.cooy<<")"<<endl;//값인지 포인터인지 주의할 것.
         }
 
         CPoint& operator+=(const CPoint& U);//+=도 구현은 하지만 역할을 +와 분리해서 사용한다.
@@ -24,14 +24,14 @@ class CPoint{
 };
 
 template <class T>
-CPoint<T>& CPoint<T>::operator+=(const CPoint& U){
+CPoint<T>& CPoint<T>::operator+=(const CPoint& U){//얘는 원본을 수정할거니까 레퍼런스 변수로 다루고 반환까지
     this->coox += U.coox;
     this->cooy += U.cooy;
     return *this;//연속적으로 +=를 체이닝할 경우를 대비해서 자기자신을 반환
 }
 
 template <class T>
-CPoint<T> CPoint<T>::operator+(const CPoint& U) const{
+CPoint<T> CPoint<T>::operator+(const CPoint& U) const{//함수시그니처 마지막 const는 멤버함수를 호출한 *this를 바꾸지 않겠다는 약속.
     CPoint Temp(*this);//이런 양식의 생성자를 만들지는 않았지만, 암묵적으로 객체 넘기면 복사가되게 cpp에서 돌아간다.
     Temp += U;
     return Temp;
@@ -50,7 +50,7 @@ int main() {
     P1 = P1 + P2;
     P3 = P3 + P4;
 
-    cout << P1 << P2;
+    cout << P1 << P3;
     return 0;
 
 }
